@@ -2,25 +2,27 @@
     <div id="app" v-if="true">
         Gib dein Passwort ein:
         <input type="password" v-model="password">
+        {{this.firebasepassword}}
 
         <div v-if="password == 'test'">
             <ul>
-                <li>19.5.2019 <input/> um 9 Uhr im Hafestuder Weg 23</li>
-                <li>14.5.2019 Treffen mit Steffi um 9 Uhr im Macumba</li>
-                <li>20.11.2019 Geburtstag planen um 15:30-17:30 Uhr</li>
+                <li><input></li>
+                <li><input></li>
+                <li><input></li>
             </ul>
         </div>
-        <button @click="addCoin">Add coin</button>
+        <button @click="savePassword">Save</button>
     </div>
 </template>
 
 <script>
-    import { db } from './config/db';
+    import {db} from './config/db';
 
     export default {
         name: 'app',
         firebase: {
-            coins: db.ref('coins')
+            entries: db.ref('entries'),
+            firebasepassword: db.ref('firebasepassword')
         },
         data: function () {
             return {
@@ -28,12 +30,13 @@
             };
         },
         methods: {
-        addCoin() {
-            this.$firebaseRefs.coins.push({
-                name: 'test'
-            });
+            savePassword() {
+                this.$firebaseRefs.firebasepassword.push({
+                    firebasepassword: this.password
+                });
+            }
+
         }
-    }
     }
 </script>
 
