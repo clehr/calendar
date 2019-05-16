@@ -1,27 +1,34 @@
 <template>
-  <div id="app">
-    <ul>
-      <li>19.5.2019 <input /> um 9 Uhr im Hafestuder Weg 23</li>
-      <li>14.5.2019 Treffen mit Steffi um 9 Uhr im Macumba</li>
-      <li>20.11.2019 Geburtstag planen um 15:30-17:30 Uhr</li>
-    </ul>
-  </div>
+    <div id="app">
+        {{randomPassword}}
+        <ul>
+            <li>19.5.2019 <input/> um 9 Uhr im Hafestuder Weg 23</li>
+            <li>14.5.2019 Treffen mit Steffi um 9 Uhr im Macumba</li>
+            <li>20.11.2019 Geburtstag planen um 15:30-17:30 Uhr</li>
+        </ul>
+    </div>
 </template>
 
 <script>
-
-export default {
-  name: 'app'
-}
+    export default {
+        name: 'app',
+        computed: {
+            // a computed getter
+            randomPassword: function () {
+                // `this` points to the vm instance
+                return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            }
+        }
+    }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
 </style>
