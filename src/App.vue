@@ -10,10 +10,13 @@
                 <li>20.11.2019 Geburtstag planen um 15:30-17:30 Uhr</li>
             </ul>
         </div>
+        <button @click="addCoin">Add coin</button>
     </div>
 </template>
 
 <script>
+    import { db } from './config/db';
+
     export default {
         name: 'app',
         data: function () {
@@ -21,6 +24,17 @@
                 password: ''
             };
         },
+        firebase: {
+            coins: db.ref('coins')
+        },
+        methods: {
+        addCoin() {
+            this.$firebaseRefs.coins.push({
+                name: 'test'
+            })
+            alert("Succeessfully added")
+        }
+    }
     }
 </script>
 
