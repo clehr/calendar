@@ -19,20 +19,19 @@
 
     export default {
         name: 'app',
+        firebase: {
+            coins: db.ref('coins')
+        },
         data: function () {
             return {
                 password: ''
             };
         },
-        firebase: {
-            coins: db.ref('coins')
-        },
         methods: {
         addCoin() {
             this.$firebaseRefs.coins.push({
                 name: 'test'
-            })
-            alert("Succeessfully added")
+            });
         }
     }
     }
