@@ -45,6 +45,9 @@
                 this.entries.push(this.entry);
             }
 
+        },
+        created () {
+            database.ref('entries').on('child_added', snapshot => this.entries.push(snapshot.val()))
         }
     }
 </script>
