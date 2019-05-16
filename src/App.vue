@@ -4,13 +4,13 @@
         <input type="password" v-model="password">
 
         <div v-if="password == 'test'">
-        {{randomPassword}}
-        <ul>
-            <li>19.5.2019 <input/> um 9 Uhr im Hafestuder Weg 23</li>
-            <li>14.5.2019 Treffen mit Steffi um 9 Uhr im Macumba</li>
-            <li>20.11.2019 Geburtstag planen um 15:30-17:30 Uhr</li>
-        </ul>
-            </div>
+            {{randomPassword}}
+            <ul>
+                <li>19.5.2019 <input/> um 9 Uhr im Hafestuder Weg 23</li>
+                <li>14.5.2019 Treffen mit Steffi um 9 Uhr im Macumba</li>
+                <li>20.11.2019 Geburtstag planen um 15:30-17:30 Uhr</li>
+            </ul>
+        </div>
     </div>
 </template>
 
