@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "calendar",
+    "calendar": "calendar-15a12"
+  }
+}
