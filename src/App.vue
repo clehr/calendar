@@ -1,11 +1,16 @@
 <template>
-    <div id="app">
+    <div id="app" v-if="true">
+        Gib dein Passwort ein:
+        <input type="password" v-model="password">
+
+        <div v-if="password == 'test'">
         {{randomPassword}}
         <ul>
             <li>19.5.2019 <input/> um 9 Uhr im Hafestuder Weg 23</li>
             <li>14.5.2019 Treffen mit Steffi um 9 Uhr im Macumba</li>
             <li>20.11.2019 Geburtstag planen um 15:30-17:30 Uhr</li>
         </ul>
+            </div>
     </div>
 </template>
 
@@ -18,7 +23,12 @@
                 // `this` points to the vm instance
                 return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
             }
-        }
+        },
+        data: function () {
+            return {
+                password: ''
+            };
+        },
     }
 </script>
 
