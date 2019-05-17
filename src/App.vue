@@ -6,13 +6,15 @@
         <div v-if="typedPassword === firebasePassword">
             <div>
                 <h1>Next Appointment?</h1>
-                <h2>When?</h2><input type="text">
-                <h2>What?</h2><input type="text">
-                <h2>Where?</h2><input type="text">
+                <h2>When?</h2><input type="text" v-model="whenContent">
+                <h2>What?</h2><input type="text" v-model="whatContent">
+                <h2>Where?</h2><input type="text" v-model="whereContent">
 
-
-<!--                <textarea v-model="originalContent" @keyup.enter="storeAppointment"/>-->
+                <!--                <textarea v-model="originalContent" @keyup.enter="storeAppointment"/>-->
+                <br>
                 <button @click="storeAppointment">Save</button>
+
+                {{combinedContent}}
             </div>
 
             <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
@@ -47,8 +49,18 @@
                 shownAppointments: [],
                 originalContent: '',
                 currentEditedAppointment: null,
-                editedContent: ''
+                editedContent: '',
+                whenContent: '',
+                whatContent: '',
+                whereContent: ''
             };
+        },
+        computed: {
+            combinedContent: {
+                get: function () {
+                    return this.whenContent + ' ' + this.whatContent + ' ' + this.whereContent;
+                },
+            },
         },
         methods: {
             storeAppointment() {
