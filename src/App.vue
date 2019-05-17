@@ -54,7 +54,7 @@
                 originalContent: '',
                 currentEditedAppointment: null,
                 editedContent: '',
-                whenContent: '',
+                whenContent: '2019-05-17T20:21',
                 whatContent: '',
                 whereContent: '',
             };
