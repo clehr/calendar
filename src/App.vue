@@ -24,8 +24,8 @@
 
                 <div v-else>
                     {{appointment.originalContent}}
-                    <span @click="editAppointment(appointment)">   Edit   </span>
-                    <span @click="removeAppointment(appointment)"> X </span>
+                    <span @click="edit(appointment)"> Edit </span>
+                    <span @click="remove(appointment)"> X </span>
                 </div>
             </div>
         </div>
@@ -67,10 +67,10 @@
                 this.whereContent = '';
                 this.whatContent = '';
             },
-            removeAppointment(appointment) {
+            remove(appointment) {
                 storedAppointments.child(appointment.id).remove();
             },
-            editAppointment(appointment) {
+            edit(appointment) {
                 this.currentEditedAppointment = appointment;
                 this.editedContent = appointment.originalContent;
             },
