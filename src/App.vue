@@ -104,7 +104,7 @@
                 return googleMapsLink;
             },
             sort(appointments) {
-                console.log(appointments.sort(this.compare));
+                appointments.sort(this.compare)
             },
             compare(a, b) {
                 let dateA = new Date(a.originalContent.split(",")[0].split(".").reverse());
