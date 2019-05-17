@@ -18,8 +18,8 @@
 
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
-                    <a @click="cancelEditing" href="#">cancel</a>
-                    <a @click="updateAppointment" href="#">update</a>
+                    <a @click="cancelEditing" href="#"> cancel </a>
+                    <a @click="updateAppointment" href="#"> update </a>
                 </div>
 
                 <div v-else>
@@ -63,6 +63,9 @@
             storeAppointment() {
                 storedAppointments.push({originalContent: this.combinedContent});
                 this.originalContent = '';
+                this.whenContent = '';
+                this.whereContent = '';
+                this.whatContent = '';
             },
             removeAppointment(appointment) {
                 storedAppointments.child(appointment.id).remove();
