@@ -6,7 +6,7 @@
         <div v-if="typedPassword === firebasePassword">
             <div>
                 <h1>Next Appointment?</h1>
-                <h2>When?</h2><input type="datetime-local" v-model="whenContent">
+                <h2>When?</h2><input id="datepicker" type="datetime-local" v-model="whenContent">
                 <h2>What?</h2><input type="text" v-model="whatContent">
                 <h2>Where?</h2><input type="text" v-model="whereContent">
 
@@ -59,7 +59,11 @@
         computed: {
             combinedContent: {
                 get: function () {
-                    return this.whenContent + ': ' + this.whatContent + ' at ' + this.whereContent;
+                    let date = this.whenContent.split("T")[0];
+                    date = date.split("-").reverse().join(".");
+                    let time = this.whenContent.split("T")[1];
+                    let formattedDateTime = date.concat(", ").concat(time).concat("h");
+                    return formattedDateTime + ': ' + this.whatContent + ' at ' + this.whereContent;
                 },
             }
         },
