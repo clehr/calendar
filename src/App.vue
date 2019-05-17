@@ -10,7 +10,7 @@
         </div>
 
         <div v-if="typedPassword === firebasePassword">
-            <div v-for="appointment in shownAppointments">{{appointment.content}} <span @click="removeAppointment(appointment)">X</span></div>
+            <div v-for="appointment in shownAppointments">{{appointment.content}} <span>   Edit   </span> <span @click="removeAppointment(appointment)">X</span></div>
         </div>
     </div>
 </template>
