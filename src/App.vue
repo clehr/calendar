@@ -20,14 +20,14 @@
 
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
-                    <div v-html="googleMapsLink"></div>
+                    <div v-html="locationLinkFor(appointment)"></div>
                     <a @click="cancelEditing" href="#"> cancel </a>
                     <a @click="updateAppointment" href="#"> update </a>
                 </div>
 
                 <div v-else>
                     {{appointment.originalContent}}
-                    <div v-html="googleMapsLink"></div>
+                    <div v-html="locationLinkFor(appointment)"></div>
                     <span @click="edit(appointment)"> Edit </span>
                     <span @click="remove(appointment)"> X </span>
                 </div>
@@ -54,7 +54,6 @@
                 whenContent: '',
                 whatContent: '',
                 whereContent: '',
-                locationForGoogleMaps: ''
             };
         },
         computed: {
@@ -62,18 +61,11 @@
                 get: function () {
                     return this.whenContent + ': ' + this.whatContent + ' at ' + this.whereContent;
                 },
-            },
-            googleMapsLink: {
-                get: function () {
-                    let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${this.locationForGoogleMaps.replace(/ /g, '+')}" target=_blank><button>travel</button></a>`;
-                    return googleMapsLink;
-                }
             }
         },
         methods: {
             storeAppointment() {
                 storedAppointments.push({originalContent: this.combinedContent});
-                this.locationForGoogleMaps = this.whereContent;
                 this.originalContent = '';
                 this.whenContent = '';
                 this.whereContent = '';
@@ -93,6 +85,11 @@
             updateAppointment() {
                 storedAppointments.child(this.currentEditedAppointment.id).update({originalContent: this.editedContent});
                 this.cancelEditing();
+            },
+            locationLinkFor(appointment) {
+                let locationForGoogleMaps = appointment.originalContent.split("at")[1];
+                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button>travel</button></a>`;
+                return googleMapsLink;
             }
         },
         created() {
