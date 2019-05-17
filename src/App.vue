@@ -21,7 +21,7 @@
             <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
 
                 <div v-if="appointment === currentEditedAppointment">
-                    <input type="text" v-model="editedContent">
+                    <textarea v-model="editedContent" />
                     <font-awesome-icon class="margin-left-and-right" @click="cancelEditing" icon="ban"></font-awesome-icon>
                     <font-awesome-icon @click="updateAppointment" icon="save"></font-awesome-icon>
                     <div v-html="locationLinkFor(appointment)"></div>
