@@ -6,12 +6,12 @@
         <div>
             <h1>Next Appointment?</h1>
             <textarea v-model="content" @keyup.enter="storeAppointment"/>
+            <button @click="storeAppointment">Save</button>
         </div>
 
         <div v-if="typedPassword === firebasePassword">
             <div v-for="appointment in appointments">{{appointment.content}}</div>
         </div>
-        <button @click="storeAppointment">Save</button>
     </div>
 </template>
 
