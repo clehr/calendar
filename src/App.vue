@@ -20,18 +20,16 @@
 
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
-                    <div v-html="locationLinkFor(appointment)"></div>
                     <font-awesome-icon @click="cancelEditing" icon="ban"></font-awesome-icon>
                     <font-awesome-icon @click="updateAppointment" icon="save"></font-awesome-icon>
+                    <div v-html="locationLinkFor(appointment)"></div>
                 </div>
 
                 <div v-else>
                     {{appointment.originalContent}}
-                    <div v-html="locationLinkFor(appointment)"></div>
-
                     <font-awesome-icon @click="edit(appointment)" icon="edit"></font-awesome-icon>
                     <font-awesome-icon @click="remove(appointment)" icon="trash-alt"></font-awesome-icon>
-
+                    <div v-html="locationLinkFor(appointment)"></div>
                 </div>
             </div>
         </div>
