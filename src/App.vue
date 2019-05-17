@@ -19,7 +19,7 @@
             <h1>Upcoming Events</h1>
 
             <button @click="sort(shownAppointments)">sort appointments</button>
-            <br>
+            <br><br>
 
             <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
 
