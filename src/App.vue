@@ -6,7 +6,12 @@
         <div v-if="typedPassword === firebasePassword">
             <div>
                 <h1>Next Appointment?</h1>
-                <textarea v-model="originalContent" @keyup.enter="storeAppointment"/>
+                <h2>When?</h2><input type="text">
+                <h2>What?</h2><input type="text">
+                <h2>Where?</h2><input type="text">
+
+
+<!--                <textarea v-model="originalContent" @keyup.enter="storeAppointment"/>-->
                 <button @click="storeAppointment">Save</button>
             </div>
 
