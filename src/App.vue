@@ -3,41 +3,41 @@
         Passwort:
         <input type="password" v-model="password">
 
-        <div v-for="singleEntry in appointmentEntries">{{singleEntry.content}}</div>
+        <div v-for="appointment in appointments">{{appointment.content}}</div>
 
         <div>
-            <textarea v-model="content" @keyup.enter="addEntry" />
+            <textarea v-model="content" @keyup.enter="storeAppointment" />
         </div>
 
         <div v-if="password == 'test'">
             <h1>hidden section</h1>
         </div>
-        <button @click="storeEntry">Save</button>
+        <button @click="storeAppointment">Save</button>
     </div>
 </template>
 
 <script>
     import {db} from './config/db';
 
-    const storedEntries = db.ref('appointmentEntries');
+    const storedAppointments = db.ref('appointments');
 
     export default {
         name: 'app',
         data: function () {
             return {
                 password: '',
-                appointmentEntries: [],
+                appointments: [],
                 content: ''
             };
         },
         methods: {
-            storeEntry() {
-                storedEntries.push({content: this.content});
+            storeAppointment() {
+                storedAppointments.push({content: this.content});
                 this.content = '';
             }
         },
         created () {
-            storedEntries.on('child_added', appointmentEntry => this.appointmentEntries.push(appointmentEntry.val()))
+            storedAppointments.on('child_added', appointment => this.appointments.push(appointment.val()))
         }
     }
 </script>
