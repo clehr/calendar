@@ -11,7 +11,7 @@
                 <h2>Where?</h2><input type="text" v-model="whereContent">
 
                 <br>
-                <button @click="storeAppointment">Save</button>
+                <button @click="storeAppointment">save</button>
             </div>
 
             <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
