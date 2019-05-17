@@ -1,9 +1,10 @@
 <template>
     <div id="app" v-if="true">
-        <font-awesome-icon icon="user-secret"></font-awesome-icon>
+        <font-awesome-icon class="margin-left-and-right" icon="user-secret"></font-awesome-icon>
         <input type="password" v-model="typedPassword">
 
         <div v-if="typedPassword === firebasePassword">
+            <hr/>
             <div>
                 <h1>Next Appointment?</h1>
                 <h2>When?</h2><input id="datepicker" type="datetime-local" v-model="whenContent">
@@ -13,6 +14,7 @@
                 <br>
                 <button @click="storeAppointment">save</button>
             </div>
+            <hr/>
 
             <h1>Upcoming Events</h1>
 
@@ -20,17 +22,18 @@
 
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
-                    <font-awesome-icon @click="cancelEditing" icon="ban"></font-awesome-icon>
+                    <font-awesome-icon class="margin-left-and-right" @click="cancelEditing" icon="ban"></font-awesome-icon>
                     <font-awesome-icon @click="updateAppointment" icon="save"></font-awesome-icon>
                     <div v-html="locationLinkFor(appointment)"></div>
                 </div>
 
                 <div v-else>
                     {{appointment.originalContent}}
-                    <font-awesome-icon @click="edit(appointment)" icon="edit"></font-awesome-icon>
+                    <font-awesome-icon class="margin-left-and-right" @click="edit(appointment)" icon="edit"></font-awesome-icon>
                     <font-awesome-icon @click="remove(appointment)" icon="trash-alt"></font-awesome-icon>
                     <div v-html="locationLinkFor(appointment)"></div>
                 </div>
+                <hr/>
             </div>
         </div>
     </div>
@@ -125,8 +128,12 @@
         color: #2c3e50;
         border-style: solid;
         border-width: 1px;
-        width: 50%;
+        width: 30%;
         margin: auto auto;
-        padding: 2%;
+        padding: 2% 10%;
+    }
+    .margin-left-and-right {
+        margin-left: 10px;
+        margin-right: 10px;
     }
 </style>
