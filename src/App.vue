@@ -35,9 +35,6 @@
             storeAppointment() {
                 storedAppointments.push({content: this.content});
                 this.content = '';
-            },
-            isString(value) {
-                return typeof value === 'string' || value instanceof String;
             }
         },
         created() {
