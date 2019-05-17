@@ -11,7 +11,7 @@
                 <h2>What?</h2><input type="text" v-model="whatContent">
                 <h2>Where?</h2><input type="text" v-model="whereContent">
 
-                <br>
+                <br><br>
                 <button @click="storeAppointment">save</button>
             </div>
             <hr/>
