@@ -1,7 +1,7 @@
 <template>
     <div id="app" v-if="true">
         Passwort:
-        <input v-model="typedPassword">
+        <input type="password" v-model="typedPassword">
 
         <div v-for="appointment in appointments">{{appointment.content}}</div>
 
