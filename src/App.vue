@@ -1,5 +1,6 @@
 <template>
     <div id="app" v-if="true">
+        <font-awesome-icon icon="user-secret"></font-awesome-icon>
         Passwort:
         <input type="password" v-model="typedPassword">
 
@@ -28,8 +29,10 @@
                 <div v-else>
                     {{appointment.originalContent}}
                     <div v-html="locationLinkFor(appointment)"></div>
-                    <span @click="edit(appointment)"> Edit </span>
-                    <span @click="remove(appointment)"> X </span>
+
+                    <font-awesome-icon @click="edit(appointment)" icon="edit"></font-awesome-icon>
+                    <font-awesome-icon @click="remove(appointment)" icon="trash-alt"></font-awesome-icon>
+
                 </div>
             </div>
         </div>
