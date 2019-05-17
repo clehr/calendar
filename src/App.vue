@@ -1,15 +1,16 @@
 <template>
     <div id="app" v-if="true">
         Passwort:
-        <input type="password" v-model="password">
+        <input v-model="typedPassword">
+
 
         <div v-for="appointment in appointments">{{appointment.content}}</div>
 
         <div>
-            <textarea v-model="content" @keyup.enter="storeAppointment" />
+            <textarea v-model="content" @keyup.enter="storeAppointment"/>
         </div>
 
-        <div v-if="password == 'test'">
+        <div v-if="typedPassword === firebasePassword">
             <h1>hidden section</h1>
         </div>
         <button @click="storeAppointment">Save</button>
@@ -25,7 +26,8 @@
         name: 'app',
         data: function () {
             return {
-                password: '',
+                typedPassword: '',
+                firebasePassword: {},
                 appointments: [],
                 content: ''
             };
@@ -36,8 +38,9 @@
                 this.content = '';
             }
         },
-        created () {
-            storedAppointments.on('child_added', appointment => this.appointments.push(appointment.val()))
+        created() {
+            storedAppointments.on('child_added', appointment => this.appointments.push(appointment.val())),
+                db.ref('password').once('value', storedPassword => this.firebasePassword = storedPassword);
         }
     }
 </script>
