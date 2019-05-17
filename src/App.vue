@@ -13,7 +13,7 @@
             <div v-for="appointment in shownAppointments">
 
                 <div v-if="appointment === editingAppointment">
-                    <input type="text" :value="appointment.content">
+                    <input type="text" v-model="appointmentContent">
                 </div>
 
                 <div v-else>
@@ -48,7 +48,8 @@
                 firebasePassword: {},
                 shownAppointments: [],
                 content: '',
-                editingAppointment: null
+                editingAppointment: null,
+                appointmentContent: ''
             };
         },
         methods: {
@@ -83,8 +84,8 @@
                 this.shownAppointments.splice(index, 1);
             });
             storedAppointments.on('child_changed', storedAppointment => {
-                const updatedAppointment = this.shownAppointments.find(appointment => appointment.id === storedAppointment.key)
-                updatedAppointment.text = storedAppointment.val().text
+                const updatedAppointment = this.shownAppointments.find(appointment => appointment.id === storedAppointment.key);
+                updatedAppointment.content = storedAppointment.val().content
             });
 
             db.ref('password').once('value', storedPassword => this.firebasePassword = JSON.stringify(storedPassword));
