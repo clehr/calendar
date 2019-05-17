@@ -6,21 +6,21 @@
         <div v-if="typedPassword === firebasePassword">
             <div>
                 <h1>Next Appointment?</h1>
-                <textarea v-model="content" @keyup.enter="storeAppointment"/>
+                <textarea v-model="originalContent" @keyup.enter="storeAppointment"/>
                 <button @click="storeAppointment">Save</button>
             </div>
 
             <div v-for="appointment in shownAppointments">
 
-                <div v-if="appointment === editingAppointment">
-                    <input type="text" v-model="appointmentContent">
+                <div v-if="appointment === currentEditedAppointment">
+                    <input type="text" v-model="editedContent">
                 </div>
 
                 <div v-else>
-                    {{appointment.content}}
+                    {{appointment.originalContent}}
                 </div>
 
-                <div v-if="appointment !== editingAppointment">
+                <div v-if="appointment !== currentEditedAppointment">
                     <span @click="editAppointment(appointment)">   Edit   </span>
                     <span @click="removeAppointment(appointment)">X</span>
                 </div>
@@ -47,29 +47,29 @@
                 typedPassword: '',
                 firebasePassword: {},
                 shownAppointments: [],
-                content: '',
-                editingAppointment: null,
-                appointmentContent: ''
+                originalContent: '',
+                currentEditedAppointment: null,
+                editedContent: ''
             };
         },
         methods: {
             storeAppointment() {
-                storedAppointments.push({content: this.content});
-                this.content = '';
+                storedAppointments.push({originalContent: this.originalContent});
+                this.originalContent = '';
             },
             removeAppointment(appointment) {
                 storedAppointments.child(appointment.id).remove();
             },
             editAppointment(appointment) {
-                this.editingAppointment = appointment;
-                this.appointmentContent = appointment.content;
+                this.currentEditedAppointment = appointment;
+                this.editedContent = appointment.originalContent;
             },
             cancelEditing() {
-                this.editingAppointment = null;
-                this.appointmentContent = '';
+                this.currentEditedAppointment = null;
+                this.editedContent = '';
             },
             updateAppointment() {
-                storedAppointments.child(this.editingAppointment.id).update({content: this.appointmentContent});
+                storedAppointments.child(this.currentEditedAppointment.id).update({originalContent: this.editedContent});
                 this.cancelEditing();
             }
         },
@@ -85,7 +85,7 @@
             });
             storedAppointments.on('child_changed', storedAppointment => {
                 const updatedAppointment = this.shownAppointments.find(appointment => appointment.id === storedAppointment.key);
-                updatedAppointment.content = storedAppointment.val().content
+                updatedAppointment.originalContent = storedAppointment.val().originalContent
             });
 
             db.ref('password').once('value', storedPassword => this.firebasePassword = JSON.stringify(storedPassword));
