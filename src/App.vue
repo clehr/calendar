@@ -3,31 +3,26 @@
         Passwort:
         <input type="password" v-model="password">
 
-        <div v-bind:key="entry" v-for="entry in entries">{{entry}}</div>
+        <div v-for="entry in entries">{{entry.entry}}</div>
 
         <div>
             <textarea  v-model="entry" @keyup.enter="addEntry" />
         </div>
 
         <div v-if="password == 'test'">
-            hidden section
+            <h1>hidden section</h1>
         </div>
-        <button @click="saveEntries">Save</button>
+        <button @click="storeEntry">Save</button>
     </div>
 </template>
 
 <script>
     import {db} from './config/db';
-    import * as firebase from "firebase";
 
-    const database = firebase.database();
+    const storedEntries = db.ref('entries');
 
     export default {
         name: 'app',
-        firebase: {
-            entries: db.ref('entries'),
-            firebasepassword: db.ref('firebasepassword')
-        },
         data: function () {
             return {
                 password: '',
@@ -36,18 +31,13 @@
             };
         },
         methods: {
-            saveEntries() {
-                this.$firebaseRefs.entries.push({
-                    entries: this.entries
-                });
-            },
-            addEntry() {
-                this.entries.push(this.entry);
+            storeEntry() {
+                storedEntries.push({entry: this.entry});
+                this.entry = '';
             }
-
         },
         created () {
-            database.ref('entries').on('child_added', snapshot => this.entries.push(snapshot.val()))
+            storedEntries.on('child_added', snapshot => this.entries.push(snapshot.val()))
         }
     }
 </script>
