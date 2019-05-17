@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueFire from 'vuefire'
+import '@/assets/css/tailwind.css'
 
 
 Vue.config.productionTip = false
