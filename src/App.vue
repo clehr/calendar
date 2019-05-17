@@ -6,7 +6,7 @@
         <div v-if="typedPassword === firebasePassword">
             <div>
                 <h1>Next Appointment?</h1>
-                <h2>When?</h2><input type="date" v-model="whenContent">
+                <h2>When?</h2><input type="datetime-local" v-model="whenContent">
                 <h2>What?</h2><input type="text" v-model="whatContent">
                 <h2>Where?</h2><input type="text" v-model="whereContent">
 
