@@ -14,7 +14,11 @@
                 <button @click="storeAppointment">save</button>
             </div>
 
+            <h1>Upcoming Events</h1>
+
             <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
+
+
 
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
