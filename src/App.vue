@@ -14,22 +14,15 @@
 
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
-                </div>
-
-                <div v-else>
-                    {{appointment.originalContent}}
-                </div>
-
-                <div v-if="appointment !== currentEditedAppointment">
-                    <span @click="editAppointment(appointment)">   Edit   </span>
-                    <span @click="removeAppointment(appointment)">X</span>
-                </div>
-
-                <div v-else>
                     <a @click="cancelEditing" href="#">cancel</a>
                     <a @click="updateAppointment" href="#">update</a>
                 </div>
 
+                <div v-else>
+                    {{appointment.originalContent}}
+                    <span @click="editAppointment(appointment)">   Edit   </span>
+                    <span @click="removeAppointment(appointment)">X</span>
+                </div>
             </div>
         </div>
     </div>
