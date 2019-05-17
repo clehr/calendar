@@ -10,11 +10,8 @@
                 <h2>What?</h2><input type="text" v-model="whatContent">
                 <h2>Where?</h2><input type="text" v-model="whereContent">
 
-                <!--                <textarea v-model="originalContent" @keyup.enter="storeAppointment"/>-->
                 <br>
                 <button @click="storeAppointment">Save</button>
-
-                {{combinedContent}}
             </div>
 
             <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
@@ -64,7 +61,7 @@
         },
         methods: {
             storeAppointment() {
-                storedAppointments.push({originalContent: this.originalContent});
+                storedAppointments.push({originalContent: this.combinedContent});
                 this.originalContent = '';
             },
             removeAppointment(appointment) {
