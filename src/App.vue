@@ -20,12 +20,14 @@
 
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
+                    <div v-html="googleMapsLink"></div>
                     <a @click="cancelEditing" href="#"> cancel </a>
                     <a @click="updateAppointment" href="#"> update </a>
                 </div>
 
                 <div v-else>
                     {{appointment.originalContent}}
+                    <div v-html="googleMapsLink"></div>
                     <span @click="edit(appointment)"> Edit </span>
                     <span @click="remove(appointment)"> X </span>
                 </div>
@@ -51,7 +53,8 @@
                 editedContent: '',
                 whenContent: '',
                 whatContent: '',
-                whereContent: ''
+                whereContent: '',
+                locationForGoogleMaps: ''
             };
         },
         computed: {
@@ -60,10 +63,18 @@
                     return this.whenContent + ' ' + this.whatContent + ' ' + this.whereContent;
                 },
             },
+            googleMapsLink: {
+                get: function () {
+                    let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${this.locationForGoogleMaps.replace(/ /g, '+')}" target=_blank>click here!</a>`;
+                    console.log(googleMapsLink);
+                    return googleMapsLink;
+                }
+            }
         },
         methods: {
             storeAppointment() {
                 storedAppointments.push({originalContent: this.combinedContent});
+                this.locationForGoogleMaps = this.whereContent;
                 this.originalContent = '';
                 this.whenContent = '';
                 this.whereContent = '';
