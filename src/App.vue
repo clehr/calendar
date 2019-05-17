@@ -1,7 +1,6 @@
 <template>
     <div id="app" v-if="true">
-        <font-awesome-icon icon="user-secret"></font-awesome-icon>
-        Passwort:
+        <a href="#"><font-awesome-icon icon="user-secret"></font-awesome-icon></a>
         <input type="password" v-model="typedPassword">
 
         <div v-if="typedPassword === firebasePassword">
@@ -22,8 +21,8 @@
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
                     <div v-html="locationLinkFor(appointment)"></div>
-                    <a @click="cancelEditing" href="#"> cancel </a>
-                    <a @click="updateAppointment" href="#"> update </a>
+                    <font-awesome-icon @click="cancelEditing" icon="ban"></font-awesome-icon>
+                    <font-awesome-icon @click="updateAppointment" icon="save"></font-awesome-icon>
                 </div>
 
                 <div v-else>
@@ -95,7 +94,7 @@
             },
             locationLinkFor(appointment) {
                 let locationForGoogleMaps = appointment.originalContent.split("at")[1];
-                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button>travel</button></a>`;
+                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button>Travel</button></a>`;
                 return googleMapsLink;
             }
         },
