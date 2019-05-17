@@ -1,6 +1,6 @@
 <template>
     <div id="app" v-if="true">
-        <a href="#"><font-awesome-icon icon="user-secret"></font-awesome-icon></a>
+        <font-awesome-icon icon="user-secret"></font-awesome-icon>
         <input type="password" v-model="typedPassword">
 
         <div v-if="typedPassword === firebasePassword">
