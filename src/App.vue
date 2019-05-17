@@ -3,14 +3,13 @@
         Passwort:
         <input type="password" v-model="typedPassword">
 
-        <div v-for="appointment in appointments">{{appointment.content}}</div>
-
         <div>
+            <h1>Next Appointment?</h1>
             <textarea v-model="content" @keyup.enter="storeAppointment"/>
         </div>
 
         <div v-if="typedPassword === firebasePassword">
-            <h1>hidden section</h1>
+            <div v-for="appointment in appointments">{{appointment.content}}</div>
         </div>
         <button @click="storeAppointment">Save</button>
     </div>
