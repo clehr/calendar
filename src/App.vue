@@ -25,7 +25,7 @@
                 <div v-else>
                     {{appointment.originalContent}}
                     <span @click="editAppointment(appointment)">   Edit   </span>
-                    <span @click="removeAppointment(appointment)">X</span>
+                    <span @click="removeAppointment(appointment)"> X </span>
                 </div>
             </div>
         </div>
