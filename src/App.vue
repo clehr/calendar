@@ -107,11 +107,8 @@
                 console.log(appointments.sort(this.compare));
             },
             compare(a, b) {
-                let dateA = new Date(a.originalContent.split(",")[0]);
-                let dateB = new Date(b.originalContent.split(",")[0]);
-
-                console.log(dateA);
-                console.log(dateB);
+                let dateA = new Date(a.originalContent.split(",")[0].split(".").reverse());
+                let dateB = new Date(b.originalContent.split(",")[0].split(".").reverse());
 
                 if (dateA < dateB) {
                     return -1;
