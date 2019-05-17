@@ -10,7 +10,7 @@
         </div>
 
         <div v-if="typedPassword === firebasePassword">
-            <div v-for="appointment in appointments">{{appointment.content}}</div>
+            <div v-for="appointment in shownAppointments">{{appointment.content}} <span @click="removeAppointment(appointment)">X</span></div>
         </div>
     </div>
 </template>
@@ -18,7 +18,7 @@
 <script>
     import {db} from './config/db';
 
-    const storedAppointments = db.ref('appointments');
+    const storedAppointments = db.ref('shownAppointments');
 
     export default {
         name: 'app',
@@ -26,7 +26,7 @@
             return {
                 typedPassword: '',
                 firebasePassword: {},
-                appointments: [],
+                shownAppointments: [],
                 content: ''
             };
         },
@@ -34,11 +34,20 @@
             storeAppointment() {
                 storedAppointments.push({content: this.content});
                 this.content = '';
+            },
+            removeAppointment(appointment) {
+                storedAppointments.child(appointment.id).remove();
             }
         },
         created() {
-            storedAppointments.on('child_added', appointment => this.appointments.push(appointment.val())),
-                db.ref('password').once('value', storedPassword => this.firebasePassword = JSON.stringify(storedPassword));
+            storedAppointments.on('child_added', storedAppointment => this.shownAppointments.push({...storedAppointment.val(), id: storedAppointment.key}));
+            storedAppointments.on('child_removed', storedAppointment => {
+                const appointmentToDelete = this.shownAppointments.find(appointment => appointment.id === storedAppointment.key);
+                const index = this.shownAppointments.indexOf(appointmentToDelete);
+                this.shownAppointments.splice(index, 1);
+            });
+
+            db.ref('password').once('value', storedPassword => this.firebasePassword = JSON.stringify(storedPassword));
         }
     }
 </script>
