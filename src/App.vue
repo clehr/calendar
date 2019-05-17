@@ -60,13 +60,12 @@
         computed: {
             combinedContent: {
                 get: function () {
-                    return this.whenContent + ' ' + this.whatContent + ' ' + this.whereContent;
+                    return this.whenContent + ': ' + this.whatContent + ' at ' + this.whereContent;
                 },
             },
             googleMapsLink: {
                 get: function () {
-                    let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${this.locationForGoogleMaps.replace(/ /g, '+')}" target=_blank>click here!</a>`;
-                    console.log(googleMapsLink);
+                    let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${this.locationForGoogleMaps.replace(/ /g, '+')}" target=_blank><button>travel</button></a>`;
                     return googleMapsLink;
                 }
             }
