@@ -126,6 +126,7 @@
         text-align: center;
         color: #2c3e50;
         border-style: solid;
+        border-width: 1px;
         width: 50%;
         margin: auto auto;
         padding: 2%;
