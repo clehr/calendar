@@ -18,8 +18,6 @@
 
             <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
 
-
-
                 <div v-if="appointment === currentEditedAppointment">
                     <input type="text" v-model="editedContent">
                     <a @click="cancelEditing" href="#"> cancel </a>
