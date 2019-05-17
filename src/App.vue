@@ -3,7 +3,6 @@
         Passwort:
         <input v-model="typedPassword">
 
-
         <div v-for="appointment in appointments">{{appointment.content}}</div>
 
         <div>
@@ -36,11 +35,14 @@
             storeAppointment() {
                 storedAppointments.push({content: this.content});
                 this.content = '';
+            },
+            isString(value) {
+                return typeof value === 'string' || value instanceof String;
             }
         },
         created() {
             storedAppointments.on('child_added', appointment => this.appointments.push(appointment.val())),
-                db.ref('password').once('value', storedPassword => this.firebasePassword = storedPassword);
+                db.ref('password').once('value', storedPassword => this.firebasePassword = JSON.stringify(storedPassword));
         }
     }
 </script>
