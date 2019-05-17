@@ -18,18 +18,23 @@
 
             <h1>Upcoming Events</h1>
 
+            <button @click="sort(shownAppointments)">sort appointments</button>
+            <br>
+
             <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
 
                 <div v-if="appointment === currentEditedAppointment">
-                    <textarea v-model="editedContent" />
-                    <font-awesome-icon class="margin-left-and-right" @click="cancelEditing" icon="ban"></font-awesome-icon>
+                    <textarea v-model="editedContent"/>
+                    <font-awesome-icon class="margin-left-and-right" @click="cancelEditing"
+                                       icon="ban"></font-awesome-icon>
                     <font-awesome-icon @click="updateAppointment" icon="save"></font-awesome-icon>
                     <div v-html="locationLinkFor(appointment)"></div>
                 </div>
 
                 <div v-else>
                     {{appointment.originalContent}}
-                    <font-awesome-icon class="margin-left-and-right" @click="edit(appointment)" icon="edit"></font-awesome-icon>
+                    <font-awesome-icon class="margin-left-and-right" @click="edit(appointment)"
+                                       icon="edit"></font-awesome-icon>
                     <font-awesome-icon @click="remove(appointment)" icon="trash-alt"></font-awesome-icon>
                     <div v-html="locationLinkFor(appointment)"></div>
                 </div>
@@ -97,6 +102,24 @@
                 let locationForGoogleMaps = appointment.originalContent.split("at")[1];
                 let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button>Travel</button></a>`;
                 return googleMapsLink;
+            },
+            sort(appointments) {
+                console.log(appointments.sort(this.compare));
+            },
+            compare(a, b) {
+                let dateA = new Date(a.originalContent.split(",")[0]);
+                let dateB = new Date(b.originalContent.split(",")[0]);
+
+                console.log(dateA);
+                console.log(dateB);
+
+                if (dateA < dateB) {
+                    return -1;
+                }
+                if (dateA > dateB) {
+                    return 1;
+                }
+                return 0;
             }
         },
         created() {
@@ -132,8 +155,15 @@
         margin: auto auto;
         padding: 2% 10%;
     }
+
     .margin-left-and-right {
         margin-left: 10px;
         margin-right: 10px;
+    }
+
+    @media (max-width: 500px) {
+        #app {
+            width: 70%;
+        }
     }
 </style>
