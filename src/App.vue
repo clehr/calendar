@@ -6,7 +6,7 @@
         <div v-if="typedPassword === firebasePassword">
             <hr/>
             <div>
-                <h2>Enter your Next Appointment</h2>
+                <h2>Enter your next Appointment</h2>
                 <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent">
                 <font-awesome-icon class="margin-left-and-right grow" icon="history"
                                    @click="resetDateTime"></font-awesome-icon>
