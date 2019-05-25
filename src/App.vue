@@ -18,10 +18,9 @@
 
             <h1>Upcoming Events</h1>
 
-            <button @click="sort(shownAppointments)">sort appointments</button>
             <br><br>
 
-            <div v-bind:key="appointment.id" v-for="appointment in shownAppointments">
+            <div v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
                 <div v-if="appointment === currentEditedAppointment">
                     <textarea v-model="editedContent"/>
@@ -70,6 +69,14 @@
                 get: function () {
                     return moment(this.whenContent).locale("de").calendar() + ': ' + this.whatContent + ' at ' + this.whereContent;
                 },
+            },
+            appointmentsSortedByDate: {
+                get: function () {
+                    //it is not possible to directly return the sort function it has to be called first
+                    //and after that the list can be returned normally
+                    this.sort(this.shownAppointments);
+                    return this.shownAppointments;
+                }
             }
         },
         methods: {
