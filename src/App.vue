@@ -4,7 +4,7 @@
         <div class="fa-border margin-bottom zoom blue-background lightblue-background-on-hover">
             <font-awesome-icon class="margin-left-and-right" icon="user-secret"></font-awesome-icon>
             <input class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                   type="password" v-model="typedPassword">
+                   type="password" v-model="typedPassword" placeholder="type in your password">
         </div>
 
         <div v-if="typedPassword === firebasePassword">
@@ -16,14 +16,18 @@
                 </h2>
 
                 <div v-if="!collapsed">
-                    <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent"
-                                         class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input id="datepicker" type="datetime-local" v-model="whenContent"
+                                         class="shadow appearance-none border rounded py-0 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <font-awesome-icon class="margin-left-and-right grow yellow" icon="history"
                                        @click="resetDateTime"></font-awesome-icon>
 
-                    <h3>What?</h3><input type="text" v-model="whatContent"
-                                         class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <h3>Where?</h3><input type="text" v-model="whereContent"
+                    <br>
+
+                    <input type="text" v-model="whatContent" placeholder="What will you do?"
+                                         class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+                    <br>
+                    <input type="text" v-model="whereContent" placeholder="where will it be?"
                                           class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                     <br><br>
