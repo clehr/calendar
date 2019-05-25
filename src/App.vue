@@ -131,7 +131,7 @@
             },
             locationLinkFor(appointment) {
                 let locationForGoogleMaps = appointment.originalContent.split("-")[1].split("(")[0];
-                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button class="grow-small bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded margin-top-bottom">Let's go</button></a>`;
+                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button class="grow-small bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded margin-top-bottom">Let's go!</button></a>`;
                 return googleMapsLink;
             },
             sort(appointments) {
