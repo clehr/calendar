@@ -8,14 +8,14 @@
             <div>
                 <h2>Next Appointment?</h2>
                 <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent">
-                <font-awesome-icon class="margin-left-and-right" icon="history"
+                <font-awesome-icon class="margin-left-and-right grow" icon="history"
                                    @click="resetDateTime"></font-awesome-icon>
 
                 <h3>What?</h3><input type="text" v-model="whatContent">
                 <h3>Where?</h3><input type="text" v-model="whereContent">
 
                 <br><br>
-                <button @click="storeAppointment">save</button>
+                <button class="grow" @click="storeAppointment">save</button>
             </div>
             <hr/>
 
@@ -30,17 +30,17 @@
 
                 <div v-if="appointment === currentEditedAppointment">
                     <textarea v-model="editedContent"/>
-                    <font-awesome-icon class="margin-left-and-right" @click="cancelEditing"
+                    <font-awesome-icon class="margin-left-and-right grow" @click="cancelEditing"
                                        icon="ban"></font-awesome-icon>
-                    <font-awesome-icon @click="updateAppointment" icon="save"></font-awesome-icon>
+                    <font-awesome-icon @click="updateAppointment" icon="save" class="grow"></font-awesome-icon>
                     <div v-html="locationLinkFor(appointment)"></div>
                 </div>
 
                 <div v-else>
                     {{appointment.originalContent}}
-                    <font-awesome-icon class="margin-left-and-right" @click="edit(appointment)"
+                    <font-awesome-icon class="margin-left-and-right grow" @click="edit(appointment)"
                                        icon="edit"></font-awesome-icon>
-                    <font-awesome-icon @click="remove(appointment)" icon="trash-alt"></font-awesome-icon>
+                    <font-awesome-icon @click="remove(appointment)" icon="trash-alt" class="grow"></font-awesome-icon>
                     <div v-html="locationLinkFor(appointment)"></div>
                 </div>
                 <hr/>
@@ -111,7 +111,7 @@
             },
             locationLinkFor(appointment) {
                 let locationForGoogleMaps = appointment.originalContent.split("at")[1];
-                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button>Travel</button></a>`;
+                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button class="grow">Travel</button></a>`;
                 return googleMapsLink;
             },
             sort(appointments) {
@@ -196,5 +196,13 @@
         #app {
             width: 70%;
         }
+    }
+
+    .grow {
+        transition: transform 0.2s ease-in-out;
+    }
+    .grow:hover {
+        /*  Making button bigger on hover  */
+        transform: scale(1.6) perspective(1px);
     }
 </style>
