@@ -206,6 +206,12 @@
         box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
     }
 
+    .fa-border {
+        border-style: solid;
+        border-width: 1px;
+        border-color: #2c3e50;
+    }
+
     .margin-left-and-right {
         margin-left: 10px;
         margin-right: 10px;
