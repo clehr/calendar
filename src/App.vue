@@ -12,7 +12,7 @@
                 <h2 @click="collapse" class="zoom yellow">
                     Enter your next appointment
                     <font-awesome-icon v-if="!collapsed" icon="arrow-down"/>
-                    <font-awesome-icon v-else icon="arrow-up"/>
+                    <font-awesome-icon v-else icon="arrow-right"/>
                 </h2>
 
                 <div v-if="!collapsed">
