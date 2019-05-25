@@ -21,8 +21,6 @@
 
             <h2>Upcoming Events</h2>
 
-            <br><br>
-
             <div v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
                 <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red" icon="exclamation"></font-awesome-icon>
