@@ -7,7 +7,7 @@
         </div>
 
         <div v-if="typedPassword === firebasePassword">
-            <div class="fa-border margin-bottom zoom">
+            <div class="fa-border margin-bottom-10 margin-top-10 zoom">
                 <h2>Enter your next appointment</h2>
                 <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent">
                 <font-awesome-icon class="margin-left-and-right grow yellow" icon="history"
@@ -224,6 +224,14 @@
 
     .margin-bottom {
         margin-bottom: 7%;
+    }
+
+    .margin-bottom-10 {
+        margin-bottom: 10%;
+    }
+
+    .margin-top-10 {
+        margin-top: 10%;
     }
 
     .width-80 {
