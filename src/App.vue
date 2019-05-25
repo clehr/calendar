@@ -12,7 +12,7 @@
                 <h2 @click="collapse">
                     Enter your next appointment
                     <font-awesome-icon v-if="!collapsed" class="margin-left-and-right grow yellow" icon="arrow-up"/>
-                    <font-awesome-icon v-else class="margin-left-and-right grow yellow" icon="arrow-down" />
+                    <font-awesome-icon v-else class="margin-left-and-right grow yellow" icon="arrow-down"/>
                 </h2>
 
                 <div v-if="!collapsed">
@@ -38,7 +38,7 @@
                 <h2>Upcoming Events:</h2>
 
                 <div class="fa-border margin-bottom width-80 zoom lightblue-background-on-hover"
-                     v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
+                     v-bind:key="appointment.id" v-for="(appointment, index) in appointmentsSortedByDate">
 
                     <b>{{appointment.title}}</b>
                     <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red"
@@ -56,6 +56,7 @@
                         <font-awesome-icon @click="updateAppointment" icon="save"
                                            class="grow yellow"></font-awesome-icon>
                         <div v-html="locationLinkFor(appointment)"></div>
+
                     </div>
 
                     <div v-else>
@@ -66,6 +67,7 @@
                                            class="grow yellow"></font-awesome-icon>
                         <div v-html="locationLinkFor(appointment)"></div>
                     </div>
+                    <i class="small-text">{{index+1}}/{{appointmentsSortedByDate.length}}</i>
                 </div>
             </div>
         </div>
@@ -322,5 +324,9 @@
 
     .lightblue-background-on-hover:hover {
         background-color: #84cde6;
+    }
+
+    .small-text {
+        font-size: small;
     }
 </style>
