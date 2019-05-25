@@ -74,7 +74,7 @@
         },
         methods: {
             storeAppointment() {
-                storedAppointments.push({originalContent: this.combinedContent});
+                storedAppointments.push({originalContent: this.combinedContent, date: this.whenContent});
                 this.originalContent = '';
                 this.whenContent = moment().format(moment.HTML5_FMT.DATETIME_LOCAL);
                 this.whereContent = '';
@@ -103,7 +103,9 @@
             sort(appointments) {
                 appointments.sort(this.compare)
             },
-            compare(dateA, dateB) {
+            compare(appointmentA, appointmentB) {
+                let dateA = appointmentA.date;
+                let dateB = appointmentB.date;
 
                 if (dateA < dateB) {
                     return -1;
