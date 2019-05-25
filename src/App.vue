@@ -25,6 +25,8 @@
 
             <div v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
+                <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red" icon="exclamation"></font-awesome-icon>
+
                 <div v-if="appointment === currentEditedAppointment">
                     <textarea v-model="editedContent"/>
                     <font-awesome-icon class="margin-left-and-right" @click="cancelEditing"
@@ -128,6 +130,12 @@
             },
             resetDateTime() {
                 this.whenContent = moment().format(moment.HTML5_FMT.DATETIME_LOCAL);
+            },
+            isSoon(appointment) {
+                let now = new moment();
+                let dateOfAppointment = new moment(appointment.date);
+                let isSoon = moment.duration(dateOfAppointment.diff(now)).hours() < 2;
+                return isSoon;
             }
         },
         created() {
@@ -167,6 +175,10 @@
     .margin-left-and-right {
         margin-left: 10px;
         margin-right: 10px;
+    }
+
+    .red {
+        color: red;
     }
 
     @media (max-width: 500px) {
