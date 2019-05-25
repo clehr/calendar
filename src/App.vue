@@ -3,29 +3,42 @@
 
         <div class="fa-border margin-bottom zoom blue-background lightblue-background-on-hover">
             <font-awesome-icon class="margin-left-and-right" icon="user-secret"></font-awesome-icon>
-            <input class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" v-model="typedPassword">
+            <input class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   type="password" v-model="typedPassword">
         </div>
 
         <div v-if="typedPassword === firebasePassword">
             <div class="fa-border margin-bottom-10 margin-top-10 zoom blue-background lightblue-background-on-hover">
-                <h2>Enter your next appointment</h2>
-                <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent" class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                <font-awesome-icon class="margin-left-and-right grow yellow" icon="history"
-                                   @click="resetDateTime"></font-awesome-icon>
+                <h2 @click="collapse">
+                    Enter your next appointment
+                    <font-awesome-icon v-if="!collapsed" class="margin-left-and-right grow yellow" icon="arrow-up"/>
+                    <font-awesome-icon v-else class="margin-left-and-right grow yellow" icon="arrow-down" />
+                </h2>
 
-                <h3>What?</h3><input type="text" v-model="whatContent" class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                <h3>Where?</h3><input type="text" v-model="whereContent" class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <div v-if="!collapsed">
+                    <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent"
+                                         class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <font-awesome-icon class="margin-left-and-right grow yellow" icon="history"
+                                       @click="resetDateTime"></font-awesome-icon>
 
-                <br><br>
-                <button class="grow-small bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded margin-bottom" @click="storeAppointment">
-                    save
-                </button>
+                    <h3>What?</h3><input type="text" v-model="whatContent"
+                                         class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <h3>Where?</h3><input type="text" v-model="whereContent"
+                                          class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+                    <br><br>
+                    <button class="grow-small bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded margin-bottom"
+                            @click="storeAppointment">
+                        save
+                    </button>
+                </div>
             </div>
 
             <div class="fa-border margin-bottom blue-background center-children">
                 <h2>Upcoming Events:</h2>
 
-                <div class="fa-border margin-bottom width-80 zoom lightblue-background-on-hover" v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
+                <div class="fa-border margin-bottom width-80 zoom lightblue-background-on-hover"
+                     v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
                     <b>{{appointment.title}}</b>
                     <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red"
@@ -34,11 +47,14 @@
                                        icon="hourglass-end"></font-awesome-icon>
 
                     <div v-if="appointment === currentEditedAppointment">
-                        <input class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" v-model="editedTitle"/>
-                        <textarea v-model="editedContent" class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                        <input class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                               v-model="editedTitle"/>
+                        <textarea v-model="editedContent"
+                                  class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                         <font-awesome-icon class="margin-left-and-right grow yellow" @click="cancelEditing"
                                            icon="ban"></font-awesome-icon>
-                        <font-awesome-icon @click="updateAppointment" icon="save" class="grow yellow"></font-awesome-icon>
+                        <font-awesome-icon @click="updateAppointment" icon="save"
+                                           class="grow yellow"></font-awesome-icon>
                         <div v-html="locationLinkFor(appointment)"></div>
                     </div>
 
@@ -78,6 +94,7 @@
                 whenContent: moment().format(moment.HTML5_FMT.DATETIME_LOCAL),
                 whatContent: '',
                 whereContent: '',
+                collapsed: false
             };
         },
         computed: {
@@ -163,6 +180,9 @@
                 let dateOfAppointment = new moment(appointment.date);
                 let diff = moment.duration(dateOfAppointment.diff(now)).asMinutes();
                 return diff < 0;
+            },
+            collapse() {
+                this.collapsed = !this.collapsed;
             }
         },
         created() {
@@ -274,7 +294,7 @@
         transition: transform 0.2s ease-in-out;
     }
 
-    .zoom:hover{
+    .zoom:hover {
         transform: scale(1.1);
     }
 
