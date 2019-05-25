@@ -142,7 +142,6 @@
                 let now = new moment();
                 let dateOfAppointment = new moment(appointment.date);
                 let diff = moment.duration(dateOfAppointment.diff(now)).asMinutes();
-                console.log(appointment.title + diff);
                 return diff < DAY_IN_MINUTES && diff >= 0;
             },
             isPast(appointment) {
