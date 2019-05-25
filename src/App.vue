@@ -80,7 +80,7 @@
             storeAppointment() {
                 storedAppointments.push({originalContent: this.combinedContent});
                 this.originalContent = '';
-                this.whenContent = '';
+                this.whenContent = moment().format(moment.HTML5_FMT.DATETIME_LOCAL);
                 this.whereContent = '';
                 this.whatContent = '';
             },
