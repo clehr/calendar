@@ -26,6 +26,7 @@
             <div v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
                 <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red" icon="exclamation"></font-awesome-icon>
+                <font-awesome-icon v-if="isPast(appointment)" class="margin-left-and-right" icon="hourglass-end"></font-awesome-icon>
 
                 <div v-if="appointment === currentEditedAppointment">
                     <textarea v-model="editedContent"/>
@@ -134,7 +135,15 @@
             isSoon(appointment) {
                 let now = new moment();
                 let dateOfAppointment = new moment(appointment.date);
-                let isSoon = moment.duration(dateOfAppointment.diff(now)).hours() < 2;
+                let diff = moment.duration(dateOfAppointment.diff(now)).hours();
+                let isSoon = diff < 2 && diff > 0;
+                return isSoon;
+            },
+            isPast(appointment) {
+                let now = new moment();
+                let dateOfAppointment = new moment(appointment.date);
+                let isSoon = moment.duration(dateOfAppointment.diff(now)).hours() <= 0;
+                console.log(moment.duration(dateOfAppointment.diff(now)).hours());
                 return isSoon;
             }
         },
