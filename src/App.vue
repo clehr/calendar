@@ -26,7 +26,7 @@
             <div v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
                 <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red" icon="exclamation"></font-awesome-icon>
-                <font-awesome-icon v-if="isPast(appointment)" class="margin-left-and-right grey" icon="hourglass-end"></font-awesome-icon>
+                <font-awesome-icon v-if="isPast(appointment)" class="margin-left-and-right lightblue" icon="hourglass-end"></font-awesome-icon>
 
                 <div v-if="appointment === currentEditedAppointment">
                     <textarea v-model="editedContent"/>
@@ -188,7 +188,7 @@
         color: red;
     }
 
-    .grey {
+    .lightblue {
         color: lightblue;
     }
 
