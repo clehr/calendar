@@ -3,18 +3,18 @@
 
         <div class="fa-border margin-bottom zoom">
             <font-awesome-icon class="margin-left-and-right" icon="user-secret"></font-awesome-icon>
-            <input type="password" v-model="typedPassword">
+            <input class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" v-model="typedPassword">
         </div>
 
         <div v-if="typedPassword === firebasePassword">
             <div class="fa-border margin-bottom-10 margin-top-10 zoom">
                 <h2>Enter your next appointment</h2>
-                <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent">
+                <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent" class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 <font-awesome-icon class="margin-left-and-right grow yellow" icon="history"
                                    @click="resetDateTime"></font-awesome-icon>
 
-                <h3>What?</h3><input type="text" v-model="whatContent">
-                <h3>Where?</h3><input type="text" v-model="whereContent">
+                <h3>What?</h3><input type="text" v-model="whatContent" class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <h3>Where?</h3><input type="text" v-model="whereContent" class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                 <br><br>
                 <button class="grow-small bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded margin-bottom" @click="storeAppointment">
@@ -34,8 +34,8 @@
                                        icon="hourglass-end"></font-awesome-icon>
 
                     <div v-if="appointment === currentEditedAppointment">
-                        <input v-model="editedTitle"/>
-                        <textarea v-model="editedContent"/>
+                        <input class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" v-model="editedTitle"/>
+                        <textarea v-model="editedContent" class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                         <font-awesome-icon class="margin-left-and-right grow yellow" @click="cancelEditing"
                                            icon="ban"></font-awesome-icon>
                         <font-awesome-icon @click="updateAppointment" icon="save" class="grow yellow"></font-awesome-icon>
