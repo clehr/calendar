@@ -17,7 +17,9 @@
                 <h3>Where?</h3><input type="text" v-model="whereContent">
 
                 <br><br>
-                <button class="grow bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded margin-bottom" @click="storeAppointment">save</button>
+                <button class="grow-small bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded margin-bottom" @click="storeAppointment">
+                    save
+                </button>
             </div>
 
             <div class="fa-border margin-bottom center-children">
@@ -129,7 +131,7 @@
             },
             locationLinkFor(appointment) {
                 let locationForGoogleMaps = appointment.originalContent.split("-")[1].split("(")[0];
-                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button class="grow bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Travel</button></a>`;
+                let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button class="grow-small bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded margin-top-bottom">Let's go</button></a>`;
                 return googleMapsLink;
             },
             sort(appointments) {
@@ -251,6 +253,15 @@
         transform: scale(1.6) perspective(1px);
     }
 
+    .grow-small {
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .grow-small:hover {
+        /*  Making button bigger on hover  */
+        transform: scale(1.3) perspective(1px);
+    }
+
     .yellow:hover {
         color: #e1e68a;
     }
@@ -263,5 +274,9 @@
 
     button {
         border: none;
+    }
+
+    .margin-top-bottom {
+        margin: 2% 2%;
     }
 </style>
