@@ -74,7 +74,7 @@
             combinedContent: {
                 get: function () {
                     let date = moment(this.whenContent).locale("de");
-                    return date.calendar() + ': ' + this.whatContent + ' at ' + this.whereContent + ' (' + date.fromNow() + ')';
+                    return date.calendar() + ': ' + this.whatContent + ' - ' + this.whereContent + ' (' + date.fromNow() + ')';
                 },
             },
             appointmentsSortedByDate: {
@@ -110,7 +110,7 @@
                 this.cancelEditing();
             },
             locationLinkFor(appointment) {
-                let locationForGoogleMaps = appointment.originalContent.split("at")[1];
+                let locationForGoogleMaps = appointment.originalContent.split("-")[1];
                 let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button class="grow">Travel</button></a>`;
                 return googleMapsLink;
             },
