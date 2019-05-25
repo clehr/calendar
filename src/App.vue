@@ -19,7 +19,7 @@
             </div>
             <hr/>
 
-            <h2>Upcoming Events</h2>
+            <h2>Upcoming Events:</h2>
 
             <div v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
