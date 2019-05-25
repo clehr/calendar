@@ -140,13 +140,13 @@
             isSoon(appointment) {
                 let now = new moment();
                 let dateOfAppointment = new moment(appointment.date);
-                let diff = moment.duration(dateOfAppointment.diff(now)).hours();
-                return diff < 8 && diff > 0;
+                let diff = moment.duration(dateOfAppointment.diff(now)).minutes();
+                return diff < 480 && diff > 0;
             },
             isPast(appointment) {
                 let now = new moment();
                 let dateOfAppointment = new moment(appointment.date);
-                let isSoon = moment.duration(dateOfAppointment.diff(now)).hours() <= 0;
+                let isSoon = moment.duration(dateOfAppointment.diff(now)).minutes() <= 0;
                 return isSoon;
             }
         },
