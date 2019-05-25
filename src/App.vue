@@ -54,6 +54,7 @@
     import moment from "moment";
 
     const storedAppointments = db.ref('shownAppointments');
+    const DAY_IN_MINUTES = 1440;
 
     export default {
         name: 'app',
@@ -140,14 +141,15 @@
             isSoon(appointment) {
                 let now = new moment();
                 let dateOfAppointment = new moment(appointment.date);
-                let diff = moment.duration(dateOfAppointment.diff(now)).minutes();
-                return diff < 480 && diff > 0;
+                let diff = moment.duration(dateOfAppointment.diff(now)).asMinutes();
+                console.log(appointment.title + diff);
+                return diff < DAY_IN_MINUTES && diff >= 0;
             },
             isPast(appointment) {
                 let now = new moment();
                 let dateOfAppointment = new moment(appointment.date);
-                let diff = moment.duration(dateOfAppointment.diff(now)).minutes();
-                return diff <= 0;
+                let diff = moment.duration(dateOfAppointment.diff(now)).asMinutes();
+                return diff < 0;
             }
         },
         created() {
