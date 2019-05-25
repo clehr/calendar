@@ -46,6 +46,7 @@
 
 <script>
     import {db} from './config/db';
+    import moment from "moment";
 
     const storedAppointments = db.ref('shownAppointments');
 
@@ -59,7 +60,7 @@
                 originalContent: '',
                 currentEditedAppointment: null,
                 editedContent: '',
-                whenContent: '',
+                whenContent: moment().format(moment.HTML5_FMT.DATETIME_LOCAL),
                 whatContent: '',
                 whereContent: '',
             };
