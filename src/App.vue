@@ -6,17 +6,17 @@
         <div v-if="typedPassword === firebasePassword">
             <hr/>
             <div>
-                <h1>Next Appointment?</h1>
-                <h2>When?</h2><input id="datepicker" type="datetime-local" v-model="whenContent">
-                <h2>What?</h2><input type="text" v-model="whatContent">
-                <h2>Where?</h2><input type="text" v-model="whereContent">
+                <h2>Next Appointment?</h2>
+                <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent">
+                <h3>What?</h3><input type="text" v-model="whatContent">
+                <h3>Where?</h3><input type="text" v-model="whereContent">
 
                 <br><br>
                 <button @click="storeAppointment">save</button>
             </div>
             <hr/>
 
-            <h1>Upcoming Events</h1>
+            <h2>Upcoming Events</h2>
 
             <br><br>
 
