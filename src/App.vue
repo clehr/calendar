@@ -1,11 +1,13 @@
 <template>
     <div id="app" v-if="true">
-        <font-awesome-icon class="margin-left-and-right" icon="user-secret"></font-awesome-icon>
-        <input type="password" v-model="typedPassword">
+
+        <div class="fa-border">
+            <font-awesome-icon class="margin-left-and-right" icon="user-secret"></font-awesome-icon>
+            <input type="password" v-model="typedPassword">
+        </div>
 
         <div v-if="typedPassword === firebasePassword">
-            <hr/>
-            <div>
+            <div class="fa-border">
                 <h2>Enter your next appointment</h2>
                 <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent">
                 <font-awesome-icon class="margin-left-and-right grow" icon="history"
@@ -17,33 +19,36 @@
                 <br><br>
                 <button class="grow" @click="storeAppointment">save</button>
             </div>
-            <hr/>
 
-            <h2>Upcoming Events:</h2>
+            <div class="fa-border">
+                <h2>Upcoming Events:</h2>
 
-            <div v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
+                <div class="fa-border" v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
-                <b>{{appointment.title}}</b>
-                <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red" icon="exclamation"></font-awesome-icon>
-                <font-awesome-icon v-if="isPast(appointment)" class="margin-left-and-right lightblue" icon="hourglass-end"></font-awesome-icon>
+                    <b>{{appointment.title}}</b>
+                    <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red"
+                                       icon="exclamation"></font-awesome-icon>
+                    <font-awesome-icon v-if="isPast(appointment)" class="margin-left-and-right lightblue"
+                                       icon="hourglass-end"></font-awesome-icon>
 
-                <div v-if="appointment === currentEditedAppointment">
-                    <input v-model="editedTitle"/>
-                    <textarea v-model="editedContent"/>
-                    <font-awesome-icon class="margin-left-and-right grow" @click="cancelEditing"
-                                       icon="ban"></font-awesome-icon>
-                    <font-awesome-icon @click="updateAppointment" icon="save" class="grow"></font-awesome-icon>
-                    <div v-html="locationLinkFor(appointment)"></div>
+                    <div v-if="appointment === currentEditedAppointment">
+                        <input v-model="editedTitle"/>
+                        <textarea v-model="editedContent"/>
+                        <font-awesome-icon class="margin-left-and-right grow" @click="cancelEditing"
+                                           icon="ban"></font-awesome-icon>
+                        <font-awesome-icon @click="updateAppointment" icon="save" class="grow"></font-awesome-icon>
+                        <div v-html="locationLinkFor(appointment)"></div>
+                    </div>
+
+                    <div v-else>
+                        {{appointment.originalContent}}
+                        <font-awesome-icon class="margin-left-and-right grow" @click="edit(appointment)"
+                                           icon="edit"></font-awesome-icon>
+                        <font-awesome-icon @click="remove(appointment)" icon="trash-alt"
+                                           class="grow"></font-awesome-icon>
+                        <div v-html="locationLinkFor(appointment)"></div>
+                    </div>
                 </div>
-
-                <div v-else>
-                    {{appointment.originalContent}}
-                    <font-awesome-icon class="margin-left-and-right grow" @click="edit(appointment)"
-                                       icon="edit"></font-awesome-icon>
-                    <font-awesome-icon @click="remove(appointment)" icon="trash-alt" class="grow"></font-awesome-icon>
-                    <div v-html="locationLinkFor(appointment)"></div>
-                </div>
-                <hr/>
             </div>
         </div>
     </div>
@@ -77,7 +82,7 @@
             combinedContent: {
                 get: function () {
                     let date = moment(this.whenContent).locale("de");
-                    return date.calendar() +' - ' + this.whereContent + ' (' + date.fromNow() + ')';
+                    return date.calendar() + ' - ' + this.whereContent + ' (' + date.fromNow() + ')';
                 },
             },
             appointmentsSortedByDate: {
@@ -91,7 +96,11 @@
         },
         methods: {
             storeAppointment() {
-                storedAppointments.push({title: this.whatContent, originalContent: this.combinedContent, date: this.whenContent});
+                storedAppointments.push({
+                    title: this.whatContent,
+                    originalContent: this.combinedContent,
+                    date: this.whenContent
+                });
                 this.originalContent = '';
                 this.title = '';
                 this.whenContent = moment().format(moment.HTML5_FMT.DATETIME_LOCAL);
@@ -112,7 +121,10 @@
                 this.editedTitle = '';
             },
             updateAppointment() {
-                storedAppointments.child(this.currentEditedAppointment.id).update({title: this.editedTitle, originalContent: this.editedContent});
+                storedAppointments.child(this.currentEditedAppointment.id).update({
+                    title: this.editedTitle,
+                    originalContent: this.editedContent
+                });
                 this.cancelEditing();
             },
             locationLinkFor(appointment) {
@@ -176,6 +188,7 @@
     html {
         background-color: #2c3e50;
     }
+
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -188,9 +201,9 @@
         margin: auto auto;
         padding: 2% 10%;
         background-color: #7abae6;
-        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
     }
 
     .margin-left-and-right {
@@ -215,6 +228,7 @@
     .grow {
         transition: transform 0.2s ease-in-out;
     }
+
     .grow:hover {
         /*  Making button bigger on hover  */
         transform: scale(1.6) perspective(1px);
