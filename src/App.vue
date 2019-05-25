@@ -143,7 +143,6 @@
                 let now = new moment();
                 let dateOfAppointment = new moment(appointment.date);
                 let isSoon = moment.duration(dateOfAppointment.diff(now)).hours() <= 0;
-                console.log(moment.duration(dateOfAppointment.diff(now)).hours());
                 return isSoon;
             }
         },
