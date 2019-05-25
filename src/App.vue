@@ -8,6 +8,9 @@
             <div>
                 <h2>Next Appointment?</h2>
                 <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent">
+                <font-awesome-icon class="margin-left-and-right" icon="history"
+                                   @click="resetDateTime"></font-awesome-icon>
+
                 <h3>What?</h3><input type="text" v-model="whatContent">
                 <h3>Where?</h3><input type="text" v-model="whereContent">
 
@@ -122,6 +125,9 @@
                     return 1;
                 }
                 return 0;
+            },
+            resetDateTime() {
+                this.whenContent = moment().format(moment.HTML5_FMT.DATETIME_LOCAL);
             }
         },
         created() {
