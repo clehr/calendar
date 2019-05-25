@@ -1,13 +1,13 @@
 <template>
     <div id="app" v-if="true">
 
-        <div class="fa-border">
+        <div class="fa-border margin-bottom">
             <font-awesome-icon class="margin-left-and-right" icon="user-secret"></font-awesome-icon>
             <input type="password" v-model="typedPassword">
         </div>
 
         <div v-if="typedPassword === firebasePassword">
-            <div class="fa-border">
+            <div class="fa-border margin-bottom">
                 <h2>Enter your next appointment</h2>
                 <h3>When?</h3><input id="datepicker" type="datetime-local" v-model="whenContent">
                 <font-awesome-icon class="margin-left-and-right grow" icon="history"
@@ -20,10 +20,10 @@
                 <button class="grow" @click="storeAppointment">save</button>
             </div>
 
-            <div class="fa-border">
+            <div class="fa-border margin-bottom center-children">
                 <h2>Upcoming Events:</h2>
 
-                <div class="fa-border" v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
+                <div class="fa-border margin-bottom width-80" v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
                     <b>{{appointment.title}}</b>
                     <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red"
@@ -220,6 +220,14 @@
         margin-right: 10px;
     }
 
+    .margin-bottom {
+        margin-bottom: 7%;
+    }
+
+    .width-80 {
+        width: 80%;
+    }
+
     .red {
         color: red;
     }
@@ -241,5 +249,12 @@
     .grow:hover {
         /*  Making button bigger on hover  */
         transform: scale(1.6) perspective(1px);
+        color: #e1e68a;
+    }
+
+    .center-children {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
     }
 </style>
