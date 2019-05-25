@@ -59,7 +59,7 @@
 
                     </div>
 
-                    <div v-else>
+                    <div v-else class="smaller-text">
                         {{appointment.originalContent}}
                         <font-awesome-icon class="margin-left-and-right grow yellow" @click="edit(appointment)"
                                            icon="edit"></font-awesome-icon>
@@ -327,6 +327,10 @@
     }
 
     .small-text {
-        font-size: small;
+        font-size: x-small;
+    }
+
+    .smaller-text {
+        font-size: smaller;
     }
 </style>
