@@ -68,11 +68,7 @@
         computed: {
             combinedContent: {
                 get: function () {
-                    let date = this.whenContent.split("T")[0];
-                    date = date.split("-").reverse().join(".");
-                    let time = this.whenContent.split("T")[1];
-                    let formattedDateTime = date.concat(", ").concat(time).concat("h");
-                    return formattedDateTime + ': ' + this.whatContent + ' at ' + this.whereContent;
+                    return moment(this.whenContent).calendar() + ': ' + this.whatContent + ' at ' + this.whereContent;
                 },
             }
         },
