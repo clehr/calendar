@@ -110,7 +110,7 @@
                 this.cancelEditing();
             },
             locationLinkFor(appointment) {
-                let locationForGoogleMaps = appointment.originalContent.split("-")[1];
+                let locationForGoogleMaps = appointment.originalContent.split("-")[1].split("(")[0];
                 let googleMapsLink = `<a href="http://maps.google.com/maps?saddr=My+Location&daddr=${locationForGoogleMaps}" target=_blank><button class="grow">Travel</button></a>`;
                 return googleMapsLink;
             },
