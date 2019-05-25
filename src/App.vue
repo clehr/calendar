@@ -68,7 +68,7 @@
         computed: {
             combinedContent: {
                 get: function () {
-                    return moment(this.whenContent).calendar() + ': ' + this.whatContent + ' at ' + this.whereContent;
+                    return moment(this.whenContent).locale("de").calendar() + ': ' + this.whatContent + ' at ' + this.whereContent;
                 },
             }
         },
@@ -103,9 +103,7 @@
             sort(appointments) {
                 appointments.sort(this.compare)
             },
-            compare(a, b) {
-                let dateA = new Date(a.originalContent.split(",")[0].split(".").reverse());
-                let dateB = new Date(b.originalContent.split(",")[0].split(".").reverse());
+            compare(dateA, dateB) {
 
                 if (dateA < dateB) {
                     return -1;
