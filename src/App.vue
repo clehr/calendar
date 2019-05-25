@@ -27,7 +27,7 @@
                                          class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                     <br>
-                    <input type="text" v-model="whereContent" placeholder="where will it be?"
+                    <input type="text" v-model="whereContent" placeholder="Where will it be?"
                                           class="shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 
                     <br><br>
