@@ -11,8 +11,8 @@
             <div class="fa-border margin-bottom-10 margin-top-10 zoom blue-background lightblue-background-on-hover">
                 <h2 @click="collapse" class="zoom yellow">
                     Enter your next appointment
-                    <font-awesome-icon v-if="!collapsed" icon="arrow-up"/>
-                    <font-awesome-icon v-else icon="arrow-down"/>
+                    <font-awesome-icon v-if="!collapsed" icon="arrow-down"/>
+                    <font-awesome-icon v-else icon="arrow-up"/>
                 </h2>
 
                 <div v-if="!collapsed">
