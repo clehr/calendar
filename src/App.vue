@@ -173,6 +173,9 @@
 </script>
 
 <style>
+    html {
+        background-color: #2c3e50;
+    }
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -184,6 +187,10 @@
         width: 30%;
         margin: auto auto;
         padding: 2% 10%;
+        background-color: #7abae6;
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     }
 
     .margin-left-and-right {
