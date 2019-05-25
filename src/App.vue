@@ -23,10 +23,12 @@
 
             <div v-bind:key="appointment.id" v-for="appointment in appointmentsSortedByDate">
 
+                <b>{{appointment.title}}</b>
                 <font-awesome-icon v-if="isSoon(appointment)" class="margin-left-and-right red" icon="exclamation"></font-awesome-icon>
                 <font-awesome-icon v-if="isPast(appointment)" class="margin-left-and-right lightblue" icon="hourglass-end"></font-awesome-icon>
 
                 <div v-if="appointment === currentEditedAppointment">
+                    <input v-model="editedTitle"/>
                     <textarea v-model="editedContent"/>
                     <font-awesome-icon class="margin-left-and-right grow" @click="cancelEditing"
                                        icon="ban"></font-awesome-icon>
@@ -61,6 +63,8 @@
                 firebasePassword: {},
                 shownAppointments: [],
                 originalContent: '',
+                title: '',
+                editedTitle: '',
                 currentEditedAppointment: null,
                 editedContent: '',
                 whenContent: moment().format(moment.HTML5_FMT.DATETIME_LOCAL),
@@ -72,7 +76,7 @@
             combinedContent: {
                 get: function () {
                     let date = moment(this.whenContent).locale("de");
-                    return date.calendar() + ': ' + this.whatContent + ' - ' + this.whereContent + ' (' + date.fromNow() + ')';
+                    return date.calendar() +' - ' + this.whereContent + ' (' + date.fromNow() + ')';
                 },
             },
             appointmentsSortedByDate: {
@@ -86,8 +90,9 @@
         },
         methods: {
             storeAppointment() {
-                storedAppointments.push({originalContent: this.combinedContent, date: this.whenContent});
+                storedAppointments.push({title: this.whatContent, originalContent: this.combinedContent, date: this.whenContent});
                 this.originalContent = '';
+                this.title = '';
                 this.whenContent = moment().format(moment.HTML5_FMT.DATETIME_LOCAL);
                 this.whereContent = '';
                 this.whatContent = '';
@@ -98,13 +103,15 @@
             edit(appointment) {
                 this.currentEditedAppointment = appointment;
                 this.editedContent = appointment.originalContent;
+                this.editedTitle = appointment.title;
             },
             cancelEditing() {
                 this.currentEditedAppointment = null;
                 this.editedContent = '';
+                this.editedTitle = '';
             },
             updateAppointment() {
-                storedAppointments.child(this.currentEditedAppointment.id).update({originalContent: this.editedContent});
+                storedAppointments.child(this.currentEditedAppointment.id).update({title: this.editedTitle, originalContent: this.editedContent});
                 this.cancelEditing();
             },
             locationLinkFor(appointment) {
@@ -155,7 +162,8 @@
             });
             storedAppointments.on('child_changed', storedAppointment => {
                 const updatedAppointment = this.shownAppointments.find(appointment => appointment.id === storedAppointment.key);
-                updatedAppointment.originalContent = storedAppointment.val().originalContent
+                updatedAppointment.originalContent = storedAppointment.val().originalContent;
+                updatedAppointment.title = storedAppointment.val().title;
             });
 
             db.ref('password').once('value', storedPassword => this.firebasePassword = JSON.stringify(storedPassword));
