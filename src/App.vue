@@ -71,7 +71,7 @@
                                            class="grow yellow"></font-awesome-icon>
                         <div v-html="locationLinkFor(appointment)"></div>
                     </div>
-                    <div v-if="isDeletionDialogOpen">
+                    <div v-if="openDeletionDialog">
                         <b>Do you want to delete the appointment?</b><br>
                         <font-awesome-icon class="margin-left-and-right grow yellow" @click="remove(appointment)"
                                            icon="check"></font-awesome-icon>
@@ -108,7 +108,7 @@
                 whatContent: '',
                 whereContent: '',
                 collapsed: false,
-                isDeletionDialogOpen: false
+                openDeletionDialog: false
             };
         },
         computed: {
@@ -199,7 +199,7 @@
                 this.collapsed = !this.collapsed;
             },
             toggleDialogForDeletion() {
-                this.isDeletionDialogOpen = !this.isDeletionDialogOpen;
+                this.openDeletionDialog = !this.openDeletionDialog;
             }
         },
         created() {
