@@ -124,7 +124,8 @@
                     //it is not possible to directly return the sort function it has to be called first
                     //and after that the list can be returned normally
                     this.sort(this.shownAppointments);
-                    return this.shownAppointments;
+                    let filteredByPassword = this.shownAppointments.filter(appointment => appointment.password === this.firebasePassword);
+                    return filteredByPassword;
                 }
             }
         },
@@ -133,7 +134,8 @@
                 storedAppointments.push({
                     title: this.whatContent,
                     originalContent: this.combinedContent,
-                    date: this.whenContent
+                    date: this.whenContent,
+                    password: this.firebasePassword
                 });
                 this.originalContent = '';
                 this.title = '';
