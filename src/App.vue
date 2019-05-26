@@ -124,7 +124,7 @@
                     //it is not possible to directly return the sort function it has to be called first
                     //and after that the list can be returned normally
                     this.sort(this.shownAppointments);
-                    let filteredByPassword = this.shownAppointments.filter(appointment => appointment.password === this.firebasePassword);
+                    let filteredByPassword = this.shownAppointments.filter(appointment => appointment.password === this.typedPassword);
                     return filteredByPassword;
                 }
             }
