@@ -54,7 +54,7 @@
                         <input class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                v-model="editedTitle"/>
                         <textarea v-model="editedContent"
-                                  class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                  class="margin-top-bottom shadow appearance-none border rounded py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                         <font-awesome-icon class="margin-left-and-right grow yellow" @click="cancelEditing"
                                            icon="ban"></font-awesome-icon>
                         <font-awesome-icon @click="updateAppointment" icon="save"
