@@ -135,7 +135,7 @@
                     title: this.whatContent,
                     originalContent: this.combinedContent,
                     date: this.whenContent,
-                    password: this.firebasePassword
+                    password: this.typedPassword
                 });
                 this.originalContent = '';
                 this.title = '';
@@ -230,6 +230,7 @@
 
             db.ref('password').once('value', storedPassword => this.firebasePasswords.push(JSON.stringify(storedPassword)));
             db.ref('password-sarah').once('value', storedPassword => this.firebasePasswords.push(JSON.stringify(storedPassword)));
+            db.ref('password-test').once('value', storedPassword => this.firebasePasswords.push(JSON.stringify(storedPassword)));
         }
     }
 </script>
