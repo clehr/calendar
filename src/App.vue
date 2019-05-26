@@ -67,15 +67,15 @@
                         {{appointment.originalContent}}
                         <font-awesome-icon class="margin-left-and-right grow yellow" @click="edit(appointment)"
                                            icon="edit"></font-awesome-icon>
-                        <font-awesome-icon @click="toggleDialogForDeletion" icon="trash-alt"
+                        <font-awesome-icon @click="toggleDialogForDeletion(appointment)" icon="trash-alt"
                                            class="grow yellow"></font-awesome-icon>
                         <div v-html="locationLinkFor(appointment)"></div>
                     </div>
-                    <div v-if="openDeletionDialog">
+                    <div v-if="openDeletionDialog && appointment === currentAppointmentToDelete">
                         <b>Do you want to delete the appointment?</b><br>
                         <font-awesome-icon class="margin-left-and-right grow yellow" @click="remove(appointment)"
                                            icon="check"></font-awesome-icon>
-                        <font-awesome-icon class="margin-left-and-right grow yellow" @click="toggleDialogForDeletion"
+                        <font-awesome-icon class="margin-left-and-right grow yellow" @click="closeDeletionDialog"
                                            icon="ban"></font-awesome-icon>
                     </div>
                     <i class="small-text">{{index+1}}/{{appointmentsSortedByDate.length}}</i>
@@ -103,6 +103,7 @@
                 title: '',
                 editedTitle: '',
                 currentEditedAppointment: null,
+                currentAppointmentToDelete: null,
                 editedContent: '',
                 whenContent: moment().format(moment.HTML5_FMT.DATETIME_LOCAL),
                 whatContent: '',
@@ -143,6 +144,7 @@
             remove(appointment) {
                 storedAppointments.child(appointment.id).remove();
                 this.toggleDialogForDeletion();
+                this.currentAppointmentToDelete = null;
             },
             edit(appointment) {
                 this.currentEditedAppointment = appointment;
@@ -199,8 +201,13 @@
             collapse() {
                 this.collapsed = !this.collapsed;
             },
-            toggleDialogForDeletion() {
+            toggleDialogForDeletion(appointment) {
                 this.openDeletionDialog = !this.openDeletionDialog;
+                this.currentAppointmentToDelete = appointment;
+            },
+            closeDeletionDialog() {
+                this.openDeletionDialog = false;
+                this.currentAppointmentToDelete = null;
             }
         },
         created() {
