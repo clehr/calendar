@@ -67,9 +67,16 @@
                         {{appointment.originalContent}}
                         <font-awesome-icon class="margin-left-and-right grow yellow" @click="edit(appointment)"
                                            icon="edit"></font-awesome-icon>
-                        <font-awesome-icon @click="remove(appointment)" icon="trash-alt"
+                        <font-awesome-icon @click="toggleDialogForDeletion" icon="trash-alt"
                                            class="grow yellow"></font-awesome-icon>
                         <div v-html="locationLinkFor(appointment)"></div>
+                    </div>
+                    <div v-if="isDeletionDialogOpen">
+                        <b>Do you want to delete the appointment?</b><br>
+                        <font-awesome-icon class="margin-left-and-right grow yellow" @click="remove(appointment)"
+                                           icon="check"></font-awesome-icon>
+                        <font-awesome-icon class="margin-left-and-right grow yellow" @click="toggleDialogForDeletion"
+                                           icon="ban"></font-awesome-icon>
                     </div>
                     <i class="small-text">{{index+1}}/{{appointmentsSortedByDate.length}}</i>
                 </div>
@@ -100,7 +107,8 @@
                 whenContent: moment().format(moment.HTML5_FMT.DATETIME_LOCAL),
                 whatContent: '',
                 whereContent: '',
-                collapsed: false
+                collapsed: false,
+                isDeletionDialogOpen: false
             };
         },
         computed: {
@@ -189,6 +197,9 @@
             },
             collapse() {
                 this.collapsed = !this.collapsed;
+            },
+            toggleDialogForDeletion() {
+                this.isDeletionDialogOpen = !this.isDeletionDialogOpen;
             }
         },
         created() {
