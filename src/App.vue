@@ -142,6 +142,7 @@
             },
             remove(appointment) {
                 storedAppointments.child(appointment.id).remove();
+                this.toggleDialogForDeletion();
             },
             edit(appointment) {
                 this.currentEditedAppointment = appointment;
