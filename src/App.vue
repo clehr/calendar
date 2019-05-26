@@ -7,7 +7,7 @@
                    type="password" v-model="typedPassword" placeholder="type in your password">
         </div>
 
-        <div v-if="typedPassword === firebasePassword">
+        <div v-if="firebasePasswords.includes(typedPassword)">
             <div class="fa-border margin-bottom-10 margin-top-10 zoom blue-background lightblue-background-on-hover">
                 <h2 @click="collapse" class="yellow">
                     Enter your next appointment
@@ -97,7 +97,7 @@
         data: function () {
             return {
                 typedPassword: '',
-                firebasePassword: {},
+                firebasePasswords: [],
                 shownAppointments: [],
                 originalContent: '',
                 title: '',
@@ -228,7 +228,8 @@
                 updatedAppointment.title = storedAppointment.val().title;
             });
 
-            db.ref('password').once('value', storedPassword => this.firebasePassword = JSON.stringify(storedPassword));
+            db.ref('password').once('value', storedPassword => this.firebasePasswords.push(JSON.stringify(storedPassword)));
+            db.ref('password-sarah').once('value', storedPassword => this.firebasePasswords.push(JSON.stringify(storedPassword)));
         }
     }
 </script>
